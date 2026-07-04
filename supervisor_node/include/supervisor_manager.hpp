@@ -34,7 +34,7 @@ public:
     void OnMotorHeartbeatReceived();
 
     /// @brief Evaluate fault logic and drive alarm LED + RUN/STOP CAN
-    ///        output. Intended to be called every 200 ms (Supervisor
+    ///        output. Intended to be called every 1000 ms (Supervisor
     ///        Monitoring period) from a dedicated thread.
     void Tick();
 

@@ -1,7 +1,7 @@
 /// @file heartbeat_monitor.hpp
 /// @brief Tracks liveness of the Sensor Node and Motor Node heartbeats.
 ///        A node is declared faulted after three consecutive missed
-///        heartbeats (600 ms at the 200 ms heartbeat period).
+///        heartbeats (3000 ms at the 1000 ms heartbeat period).
 #pragma once
 
 #include <cstdint>
@@ -16,7 +16,7 @@ public:
     /// @brief Call when a heartbeat frame is received from this node.
     void OnHeartbeatReceived();
 
-    /// @brief Call once per supervisor monitoring tick (200 ms) to age
+    /// @brief Call once per supervisor monitoring tick (1000 ms) to age
     ///        out the current window and evaluate for missed heartbeats.
     void OnMonitoringTick();
 
@@ -34,7 +34,7 @@ public:
     void OnSensorHeartbeatReceived() { sensor_tracker_.OnHeartbeatReceived(); }
     void OnMotorHeartbeatReceived() { motor_tracker_.OnHeartbeatReceived(); }
 
-    /// @brief Call once per 200 ms supervisor monitoring tick.
+    /// @brief Call once per 1000 ms supervisor monitoring tick.
     void OnMonitoringTick();
 
     bool IsSensorNodeFaulted() const { return sensor_tracker_.IsFaulted(); }

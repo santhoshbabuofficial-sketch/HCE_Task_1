@@ -27,7 +27,7 @@ using hce::sensor_node::LcdSensorObserver;
 using hce::sensor_node::PressureSensor;
 using hce::sensor_node::SensorManager;
 
-constexpr uint32_t kSensorSamplePeriodMs = 200U;
+constexpr uint32_t kSensorSamplePeriodMs = 1000U;
 constexpr size_t kSensorThreadStackSize = 2048U;
 constexpr size_t kHeartbeatThreadStackSize = 1024U;
 constexpr int kSensorThreadPriority = 5;

@@ -16,7 +16,7 @@ namespace {
 using hce::supervisor_node::GpioOverlay;
 using hce::supervisor_node::SupervisorManager;
 
-constexpr uint32_t kMonitoringPeriodMs = 200U;
+constexpr uint32_t kMonitoringPeriodMs = 1000U;
 constexpr size_t kMonitorThreadStackSize = 2048U;
 constexpr int kMonitorThreadPriority = 5;
 

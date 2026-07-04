@@ -1,6 +1,6 @@
 /// @file heartbeat.hpp
 /// @brief Periodic heartbeat: toggles the PC4 LED and transmits CAN ID
-///        0x201 every 200 ms.
+///        0x201 every 1000 ms.
 #pragma once
 
 #include <cstdint>
@@ -18,7 +18,7 @@ public:
 
     void Tick();
 
-    static constexpr uint32_t kPeriodMs = 200U;
+    static constexpr uint32_t kPeriodMs = 1000U;
 
 private:
     GpioOverlay& overlay_;

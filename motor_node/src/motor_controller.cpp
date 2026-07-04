@@ -1,5 +1,9 @@
 #include "motor_controller.hpp"
 
+#include <zephyr/logging/log.h>
+
+LOG_MODULE_REGISTER(motor_controller, LOG_LEVEL_INF);
+
 namespace hce::motor_node {
 
 MotorController::MotorController(IStepperMotorDriver& driver) : driver_(driver) {}
@@ -10,6 +14,10 @@ void MotorController::OnRunCommand(uint32_t step_rate_hz, bool forward) {
     step_rate_hz_ = step_rate_hz;
     tick_counter_ = 0U;
     state_ = MotorState::kRunning;
+
+    LOG_INF("RX RunCommand: step_rate_hz=%u direction=%s", step_rate_hz,
+            forward ? "FWD" : "REV");
+    LOG_INF("STATE -> RUNNING");
 }
 
 void MotorController::OnStopCommand() {
@@ -17,6 +25,9 @@ void MotorController::OnStopCommand() {
     driver_.Disable();
     step_rate_hz_ = 0U;
     state_ = MotorState::kStopped;
+
+    LOG_INF("RX StopCommand");
+    LOG_INF("STATE -> STOPPED");
 }
 
 void MotorController::Tick() {

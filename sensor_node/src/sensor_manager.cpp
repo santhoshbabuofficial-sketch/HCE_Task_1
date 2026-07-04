@@ -1,5 +1,9 @@
 #include "sensor_manager.hpp"
 
+#include <zephyr/logging/log.h>
+
+LOG_MODULE_REGISTER(sensor_manager, LOG_LEVEL_INF);
+
 namespace hce::sensor_node {
 
 void CanSensorObserver::OnPressureSample(float pressure_pa) {
@@ -11,6 +15,9 @@ void CanSensorObserver::OnPressureSample(float pressure_pa) {
     const hce::sensor::MessageCodec::Payload payload = hce::sensor::MessageCodec::EncodePressure(msg);
     can_bus_.Send(hce::sensor::CanId::kPressure, payload.data(),
                    hce::sensor::MessageCodec::kPayloadBytes);
+
+    LOG_INF("TX Pressure: pressure_pa=%.2f sequence=%u", static_cast<double>(pressure_pa),
+            msg.sequence);
 }
 
 void CanSensorObserver::OnFlowSample(float flow_lpm) {
@@ -22,6 +29,8 @@ void CanSensorObserver::OnFlowSample(float flow_lpm) {
     const hce::sensor::MessageCodec::Payload payload = hce::sensor::MessageCodec::EncodeFlow(msg);
     can_bus_.Send(hce::sensor::CanId::kFlow, payload.data(),
                    hce::sensor::MessageCodec::kPayloadBytes);
+
+    LOG_INF("TX Flow: flow_lpm=%.2f sequence=%u", static_cast<double>(flow_lpm), msg.sequence);
 }
 
 SensorManager::SensorManager(IPressureSensor& pressure_sensor, IFlowSensor& flow_sensor)

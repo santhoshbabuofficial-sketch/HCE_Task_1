@@ -61,7 +61,7 @@ public:
     bool AddObserver(ISensorDataObserver& observer);
 
     /// @brief Sample both sensors once and notify all observers.
-    ///        Intended to be called every 200 ms from a dedicated thread.
+    ///        Intended to be called every 1000 ms from a dedicated thread.
     void Tick();
 
     /// @brief Called by the CAN RX path when a STOP command (0x100) arrives.
